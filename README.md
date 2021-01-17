@@ -1,2 +1,15 @@
-# react-ts-antd
-一个简易的react+ts+antd的项目
+# umi project
+
+## Getting Started
+
+Install dependencies,
+
+```bash
+$ yarn
+```
+
+Start the dev server,
+
+```bash
+$ yarn start
+```
