@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Button } from 'antd';
 import {
   MailOutlined,
   AntDesignOutlined,
@@ -8,13 +8,24 @@ import {
   AlipayOutlined,
 } from '@ant-design/icons';
 import './index.less';
+import { Link, history } from 'umi';
 
 const { Header, Footer, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const index = () => {
+const handleClickLink = () => {
+  // history.push('/page1');
+  history.push({
+    pathname: '/page1',
+    query: {
+      id: '1',
+    },
+  });
+};
+
+const index = (props: any) => {
   return (
-    <Layout>
+    <Layout style={{ height: '100%' }}>
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
@@ -32,6 +43,7 @@ const index = () => {
         <Menu
           theme="dark"
           mode="inline"
+          className="menu"
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
           onClick={(e) => {
@@ -64,6 +76,9 @@ const index = () => {
           style={{ margin: '24px 16px', padding: 24, minHeight: 'max-content' }}
         >
           这是Content
+          <Link to="/page1">点击我跳转到page1</Link>
+          <Button onClick={handleClickLink}>点击我也可以</Button>
+          {props.children}
         </Content>
         <Footer className="layout-footer-classname"> by ekko</Footer>
       </Layout>
