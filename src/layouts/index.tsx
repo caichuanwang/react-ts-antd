@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version: 1.0
+ * @Author: ekko
+ * @Date: 2021-01-18 09:32:52
+ * @LastEditors: ekko
+ * @LastEditTime: 2021-01-19 16:34:43
+ */
 import React from 'react';
 import { Layout, Menu, Button } from 'antd';
 import {
@@ -8,7 +16,7 @@ import {
   AlipayOutlined,
 } from '@ant-design/icons';
 import './index.less';
-import { Link, history } from 'umi';
+import { Link, history, NavLink } from 'umi';
 
 const { Header, Footer, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -23,6 +31,10 @@ const handleClickLink = () => {
   });
 };
 
+/**
+ *
+ * @param props
+ */
 const index = (props: any) => {
   return (
     <Layout style={{ height: '100%' }}>
@@ -77,6 +89,7 @@ const index = (props: any) => {
         >
           这是Content
           <Link to="/page1">点击我跳转到page1</Link>
+          <NavLink to="/page1">点我啊</NavLink>
           <Button onClick={handleClickLink}>点击我也可以</Button>
           {props.children}
         </Content>
