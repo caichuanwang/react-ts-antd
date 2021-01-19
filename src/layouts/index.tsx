@@ -16,7 +16,7 @@ import {
   AlipayOutlined,
 } from '@ant-design/icons';
 import './index.less';
-import { Link, history, NavLink } from 'umi';
+import { Link, history, NavLink, useHistory, useLocation } from 'umi';
 
 const { Header, Footer, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -35,7 +35,8 @@ const handleClickLink = () => {
  *
  * @param props
  */
-const index = (props: any) => {
+const index = (props: { chilren: React.ReactNode }) => {
+  const location = useLocation();
   return (
     <Layout style={{ height: '100%' }}>
       <Sider
@@ -49,20 +50,27 @@ const index = (props: any) => {
         }}
       >
         <div className="logo">
-          <AlibabaOutlined />
+          <div className="text">华唐</div>
         </div>
         {/* 这是sider */}
         <Menu
           theme="dark"
           mode="inline"
           className="menu"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
+          selectedKeys={[location.pathname]} // 这里的selectedKeys是重点，如果使用default
+          // 就会出现一开始初始化的路由是'/' ,导致无法选中，但是现在这个是会随路由变化而变化的
+          // defaultOpenKeys={['sub1']}
           onClick={(e) => {
             console.log(e);
           }}
         >
-          <SubMenu
+          <Menu.Item key="/course" icon={<MailOutlined />}>
+            <NavLink to="/course">课程在线</NavLink>
+          </Menu.Item>
+          <Menu.Item key="/about" icon={<AntDesignOutlined />}>
+            <NavLink to="/about">关于我们</NavLink>
+          </Menu.Item>
+          {/* <SubMenu
             key="sub1"
             icon={<MailOutlined />}
             title="课程在线"
@@ -71,29 +79,30 @@ const index = (props: any) => {
             key="sub2"
             icon={<AntDesignOutlined />}
             title="关于我们"
-          ></SubMenu>
-          <SubMenu key="sub3" icon={<StarOutlined />} title="我的收藏">
+          ></SubMenu> */}
+          {/* <SubMenu key="sub3" icon={<StarOutlined />} title="我的收藏">
             <Menu.ItemGroup key="g1" title="阿里巴巴">
               <Menu.Item key="m1">
                 <AlipayOutlined /> 支付宝
               </Menu.Item>
             </Menu.ItemGroup>
-          </SubMenu>
+          </SubMenu> */}
         </Menu>
       </Sider>
       <Layout>
-        <Header className="layout-header-classname">这是header</Header>
+        <Header className="layout-header-classname"></Header>
         <Content
           className="layout-content-classname"
-          style={{ margin: '24px 16px', padding: 24, minHeight: 'max-content' }}
+          style={{ margin: '12px', padding: 12, backgroundColor: '#FFFFFF' }}
         >
-          这是Content
-          <Link to="/page1">点击我跳转到page1</Link>
+          {/* <Link to="/page1">点击我跳转到page1</Link>
           <NavLink to="/page1">点我啊</NavLink>
-          <Button onClick={handleClickLink}>点击我也可以</Button>
+          <Button onClick={handleClickLink}>点击我也可以</Button> */}
           {props.children}
         </Content>
-        <Footer className="layout-footer-classname"> by ekko</Footer>
+        <Footer className="layout-footer-classname">
+          react-ts-antd-umi @2021 Create by 华唐
+        </Footer>
       </Layout>
     </Layout>
   );

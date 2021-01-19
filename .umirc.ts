@@ -21,6 +21,10 @@ export default defineConfig({
       title: '这是layout',
       routes: [
         {
+          path: '/',
+          redirect: '/course',
+        },
+        {
           path: '/page1',
           component: '@/pages/index',
           exact: true,
@@ -31,6 +35,18 @@ export default defineConfig({
           component: '@/pages/airpay',
           exact: true,
           title: '这是airpay',
+        },
+        {
+          path: '/course',
+          component: '@/pages/course',
+          exact: true,
+          title: '课程介绍',
+        },
+        {
+          path: '/about',
+          component: '@/pages/about',
+          exact: true,
+          title: '关于我们',
         },
       ],
     },
