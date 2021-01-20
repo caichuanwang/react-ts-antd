@@ -4,7 +4,7 @@
  * @Author: ekko
  * @Date: 2021-01-18 09:32:52
  * @LastEditors: ekko
- * @LastEditTime: 2021-01-19 16:34:43
+ * @LastEditTime: 2021-01-20 09:22:45
  */
 import React from 'react';
 import { Layout, Menu, Button } from 'antd';
@@ -35,7 +35,7 @@ const handleClickLink = () => {
  *
  * @param props
  */
-const index = (props: { chilren: React.ReactNode }) => {
+const index = (props: { children: React.ReactNode }) => {
   const location = useLocation();
   return (
     <Layout style={{ height: '100%' }}>

@@ -4,7 +4,7 @@
  * @Author: ekko
  * @Date: 2021-01-18 09:32:52
  * @LastEditors: ekko
- * @LastEditTime: 2021-01-19 16:02:48
+ * @LastEditTime: 2021-01-20 14:24:38
  */
 import { defineConfig } from 'umi';
 
@@ -12,7 +12,10 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-
+  dva: {
+    hmr: true, //表示是否启用 dva model 的热更新。
+    immer: true, //表示是否启用 immer 以方便修改 reducer
+  },
   routes: [
     // { path: '/', component: '@/pages/index' },
     {
