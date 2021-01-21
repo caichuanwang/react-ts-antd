@@ -4,7 +4,7 @@
  * @Author: ekko
  * @Date: 2021-01-18 09:32:52
  * @LastEditors: ekko
- * @LastEditTime: 2021-01-20 09:22:45
+ * @LastEditTime: 2021-01-21 18:03:21
  */
 import React from 'react';
 import { Layout, Menu, Button } from 'antd';
@@ -38,7 +38,7 @@ const handleClickLink = () => {
 const index = (props: { children: React.ReactNode }) => {
   const location = useLocation();
   return (
-    <Layout style={{ height: '100%' }}>
+    <Layout style={{ minHeight: '100%' }}>
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
