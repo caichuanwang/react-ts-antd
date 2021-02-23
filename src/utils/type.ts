@@ -6,8 +6,13 @@ export interface Course {
   courseNum: string;
   courseAddress: string;
 }
+export interface addCourse {
+  label: string;
+  value: string;
+}
+
 export type Response = {
-  data: Course[];
-  success: boolean;
-  keywords: '';
+  data: Course[] | addCourse[];
+  success?: boolean;
+  keywords?: '';
 };

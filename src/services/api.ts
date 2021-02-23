@@ -18,3 +18,19 @@ export const getList = (params: object) => {
     params,
   }).then(checkRes);
 };
+
+// 请求课程分类
+export const getCourseTypeList = () => {
+  return Axios.get('/api/dictionary/type').then(checkRes);
+};
+
+const p = new Promise(function (resolve, reject) {
+  resolve('ceshi shuju ');
+});
+export const test: any = () => {
+  return p.then((res) => {
+    return {
+      data: '123',
+    };
+  });
+};

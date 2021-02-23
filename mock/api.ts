@@ -79,4 +79,12 @@ const getFilterList = (req: { url: string }, res: any) => {
 
 export default {
   'GET /api/list': getFilterList,
+  '/api/dictionary/type': {
+    data: [
+      { label: 'React', value: 'React' },
+      { label: 'Vue', value: 'Vue' },
+      { label: 'Node', value: 'Node' },
+      { label: 'uniapp', value: 'uniapp' },
+    ],
+  },
 };

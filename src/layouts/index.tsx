@@ -22,7 +22,6 @@ const { Header, Footer, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 const handleClickLink = () => {
-  // history.push('/page1');
   history.push({
     pathname: '/page1',
     query: {
@@ -31,10 +30,18 @@ const handleClickLink = () => {
   });
 };
 
-/**
- *
- * @param props
- */
+const getMeunSelectKeys = (pathname: string): string[] => {
+  if (pathname === '') {
+    return [];
+  }
+  let path: string[] = pathname.split('/');
+  let selectKeys: string[] = [];
+  path.forEach((e: string, i: number) => {
+    selectKeys.push(path.slice(0, path.length - i).join('/'));
+  });
+  return selectKeys;
+};
+
 const index = (props: { children: React.ReactNode }) => {
   const location = useLocation();
   return (
@@ -57,11 +64,11 @@ const index = (props: { children: React.ReactNode }) => {
           theme="dark"
           mode="inline"
           className="menu"
-          selectedKeys={[location.pathname]} // 这里的selectedKeys是重点，如果使用default
+          selectedKeys={getMeunSelectKeys(location.pathname)} // 这里的selectedKeys是重点，如果使用default
           // 就会出现一开始初始化的路由是'/' ,导致无法选中，但是现在这个是会随路由变化而变化的
           // defaultOpenKeys={['sub1']}
           onClick={(e) => {
-            console.log(e);
+            console.log(e, '7');
           }}
         >
           <Menu.Item key="/course" icon={<MailOutlined />}>

@@ -8,13 +8,14 @@
  */
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Pagination, Input } from 'antd';
-// import Axios, { AxiosResponse } from 'axios'
 import { getList } from '@/services/api';
 import { Course, Response } from '@/utils/type';
+import '@/styles/course.less';
+import { history } from 'umi';
 
 const { Search } = Input;
 
-function index() {
+function index(props: any) {
   const [data, setData] = useState<Course[]>([] as Course[]);
   const [keywords, setKeywords] = useState('');
 
@@ -59,30 +60,37 @@ function index() {
 
   const getData = (params: object) => {
     getList(params).then((res: Response) => {
-      console.log(res, '9696');
-      setData(res.data);
+      setData(res.data as Course[]);
     });
   };
   const onSearch = (value: string) => {
     setKeywords(value);
   };
 
+  const addHandle = () => {
+    history.push('/course/add');
+  };
   useEffect(() => {
     getData({ keywords });
   }, [keywords]);
 
   return (
-    <div>
-      <Search
-        placeholder="请输入搜索内容"
-        allowClear
-        enterButton="Search"
-        size="large"
-        onSearch={onSearch}
-        style={{ width: 200 }}
-      />
+    <>
+      <div className="top-nav">
+        <Search
+          placeholder="请输入搜索内容"
+          allowClear
+          enterButton="Search"
+          size="large"
+          onSearch={onSearch}
+          style={{ width: 200 }}
+        />
+        <Button type="primary" onClick={addHandle}>
+          添加
+        </Button>
+      </div>
       <Table dataSource={data} columns={columns}></Table>
-    </div>
+    </>
   );
 }
 
