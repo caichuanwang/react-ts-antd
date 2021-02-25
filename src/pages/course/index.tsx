@@ -11,7 +11,7 @@ import { Table, Button, Pagination, Input } from 'antd';
 import { getList } from '@/services/api';
 import { Course, Response } from '@/utils/type';
 import '@/styles/course.less';
-import { history } from 'umi';
+import { history, Link } from 'umi';
 
 const { Search } = Input;
 
@@ -50,7 +50,9 @@ function index(props: any) {
       render: (record: { id: string }) => {
         return (
           <div>
-            <Button type="text">编辑</Button>
+            <Button type="text">
+              <Link to={`/course/edit/${record.id}`}>编辑</Link>{' '}
+            </Button>
             <Button type="text">删除</Button>
           </div>
         );

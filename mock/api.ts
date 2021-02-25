@@ -1,3 +1,6 @@
+import { message } from '@umijs/plugin-request/lib/ui';
+
+import { addCourse } from '@/utils/type';
 /*
  * @Descripttion:
  * @version: 1.0
@@ -77,6 +80,53 @@ const getFilterList = (req: { url: string }, res: any) => {
   });
 };
 
+const addCourses = (req: { body: CourseList }, res: any) => {
+  let {
+    courseType,
+    courseName,
+    courseCount,
+    courseNum,
+    courseAddress,
+  } = req.body;
+  courseList.unshift({
+    id: Date.now(),
+    courseType,
+    courseName,
+    courseNum,
+    courseCount,
+    courseAddress,
+  });
+  res.send({
+    message: '添加成功',
+    success: true,
+  });
+};
+
+// 获取编辑课程的内容
+const getOneList = (req: { body: { id: number } }, res: any) => {
+  let { id } = req.body;
+  let data = courseList.filter((e: CourseList) => {
+    return e.id == id;
+  });
+  res.send({
+    success: true,
+    data,
+  });
+};
+
+// 编辑课程
+const editCourse = (req: { body: CourseList }, res: any) => {
+  let { id } = req.body;
+  let index = courseList.findIndex((item: CourseList) => {
+    return item.id == id;
+  });
+  courseList[index] = { ...req.body };
+  res.send({
+    message: '编辑成功',
+    success: true,
+  });
+};
+
 export default {
   'GET /api/list': getFilterList,
   '/api/dictionary/type': {
@@ -87,4 +137,7 @@ export default {
       { label: 'uniapp', value: 'uniapp' },
     ],
   },
+  'POST  /api/course/add': addCourses,
+  'POST  /api/getOneList': getOneList,
+  'POST /api/course/edit': editCourse,
 };

@@ -57,6 +57,12 @@ export default defineConfig({
               exact: true,
               title: '添加课程',
             },
+            {
+              path: '/course/edit/:id',
+              component: '@/pages/course/addCourse',
+              exact: true,
+              title: '编辑课程',
+            },
           ],
         },
         {

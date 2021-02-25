@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Select } from 'antd';
-import { addCourse, Response } from '@/utils/type';
-import { getCourseTypeList, test } from '@/services/api';
+import { Form, Input, Button, Select, message } from 'antd';
+import { addCourse, Response, Course } from '@/utils/type';
+import { getCourseTypeList, test, add, query, edit } from '@/services/api';
+import { history, useParams } from 'umi';
 
 const { Option } = Select;
 
@@ -14,6 +15,9 @@ const tailLayout = {
 };
 
 const addCourseFun = (props: any) => {
+  const { id } = props.match.params;
+  const [form] = Form.useForm();
+
   const [typeList, setTypeList] = useState<addCourse[]>([] as addCourse[]);
 
   useEffect(() => {
@@ -23,14 +27,39 @@ const addCourseFun = (props: any) => {
     test().then((res: any) => {
       console.log(res);
     });
+    query({ id: props.match.params.id }).then((res: Response) => {
+      form.setFieldsValue(...res.data);
+    });
   }, []);
+
+  const onFinish = (values: object) => {
+    if (id) {
+      edit({ ...values, id }).then((res: Response) => {
+        if (res && res.success) {
+          history.push('/course/list');
+          message.success(res.message);
+        } else {
+          message.error('编辑失败');
+        }
+      });
+    } else {
+      add(values).then((res: Response) => {
+        if (res && res.success) {
+          history.push('/course/list');
+          message.success(res.message);
+        } else {
+          message.error('添加失败');
+        }
+      });
+    }
+  };
 
   return (
     <>
-      <Form {...layout} name="basic">
+      <Form {...layout} name="basic" onFinish={onFinish} form={form}>
         <Form.Item
           label="课程类别"
-          name="type"
+          name="courseType"
           rules={[{ required: true, message: '请输入课程类别!' }]}
         >
           <Select>
@@ -43,28 +72,28 @@ const addCourseFun = (props: any) => {
         </Form.Item>
         <Form.Item
           label="课程名称"
-          name="name"
+          name="courseName"
           rules={[{ required: true, message: '请输入课程名称!' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="课程总价"
-          name="totalPrice"
+          name="courseCount"
           rules={[{ required: true, message: '请输入课程总价!' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="课程数量"
-          name="amount"
+          name="courseNum"
           rules={[{ required: true, message: '请输入课程数量!' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="课程地址"
-          name="address"
+          name="courseAddress"
           rules={[{ required: true, message: '请输入课程地址!' }]}
         >
           <Input />

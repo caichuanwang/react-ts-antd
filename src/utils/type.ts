@@ -15,4 +15,5 @@ export type Response = {
   data: Course[] | addCourse[];
   success?: boolean;
   keywords?: '';
+  message?: string;
 };

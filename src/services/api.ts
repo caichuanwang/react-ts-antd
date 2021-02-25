@@ -34,3 +34,16 @@ export const test: any = () => {
     };
   });
 };
+
+export const add = (params: object) => {
+  return Axios.post('/api/course/add', params).then(checkRes);
+};
+
+// 查询课程
+export const query = (params: object) => {
+  return Axios.post('/api/getOneList', params).then(checkRes);
+};
+// 编辑课程
+export const edit = (params: object) => {
+  return Axios.post('/api/course/edit', params).then(checkRes);
+};
