@@ -7,8 +7,8 @@
  * @LastEditTime: 2021-01-21 17:37:44
  */
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Pagination, Input } from 'antd';
-import { getList } from '@/services/api';
+import { Table, Button, Pagination, Input, message } from 'antd';
+import { del, getList } from '@/services/api';
 import { Course, Response } from '@/utils/type';
 import '@/styles/course.less';
 import { history, Link } from 'umi';
@@ -53,12 +53,28 @@ function index(props: any) {
             <Button type="text">
               <Link to={`/course/edit/${record.id}`}>编辑</Link>{' '}
             </Button>
-            <Button type="text">删除</Button>
+            <Button
+              type="text"
+              onClick={() => {
+                delCourse(record.id);
+              }}
+            >
+              删除
+            </Button>
           </div>
         );
       },
     },
   ];
+  // deleter coures
+  const delCourse = (id: string) => {
+    del({ id }).then((res: any) => {
+      if (res.success) {
+        message.success('删除成功');
+        getData({ keywords });
+      }
+    });
+  };
 
   const getData = (params: object) => {
     getList(params).then((res: Response) => {

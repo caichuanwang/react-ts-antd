@@ -127,6 +127,19 @@ const editCourse = (req: { body: CourseList }, res: any) => {
   });
 };
 
+// 删除课程
+const delCourse = (req: { body: { id: number } }, res: any) => {
+  let { id } = req.body;
+  let index = courseList.findIndex((e: CourseList) => {
+    return e.id == id;
+  });
+  let newCourseList = courseList.splice(index, 1);
+  res.send({
+    message: '删除成功',
+    success: true,
+  });
+};
+
 export default {
   'GET /api/list': getFilterList,
   '/api/dictionary/type': {
@@ -140,4 +153,5 @@ export default {
   'POST  /api/course/add': addCourses,
   'POST  /api/getOneList': getOneList,
   'POST /api/course/edit': editCourse,
+  'POST /api/course/del': delCourse,
 };

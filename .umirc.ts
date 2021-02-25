@@ -12,6 +12,9 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  history: {
+    type: 'hash',
+  },
   dva: {
     hmr: true, //表示是否启用 dva model 的热更新。
     immer: true, //表示是否启用 immer 以方便修改 reducer

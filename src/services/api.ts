@@ -3,7 +3,6 @@ import { Response } from '@/utils/type';
 
 function checkRes(res: { data: Response; status: number }): Response {
   if (res.status >= 200 && res.status <= 300) {
-    console.log('11', { ...res.data });
     return { ...res.data };
   }
   return {
@@ -46,4 +45,12 @@ export const query = (params: object) => {
 // 编辑课程
 export const edit = (params: object) => {
   return Axios.post('/api/course/edit', params).then(checkRes);
+};
+// deltele course
+export const del = (params: object) => {
+  return Axios.post('/api/course/del', params).then((res: Response) => {
+    return {
+      ...res.data,
+    };
+  });
 };
